@@ -5,9 +5,9 @@
 		<artifactId>community-repository-template</artifactId>
 		<version>${revision}${changelist}</version>
 	</parent>
-	<artifactId>org.knime.core.tests</artifactId>
+	<artifactId>org.knime.community.template.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
-	
+
 	<properties>
 		<revision>1.0.0</revision>
 	</properties>
@@ -17,7 +17,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho.version}</version>
 				<configuration>
 					<dependency-resolution>
 					<!-- These additional dependencies ensure that the test

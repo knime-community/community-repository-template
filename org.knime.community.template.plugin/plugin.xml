@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.knime.workbench.repository.categories">
+      <category
+            description="AP Repository Template"
+            level-id="template"
+            name="AP Repository Template"
+            path="/misc">
+      </category>
+   </extension>   
+</plugin>

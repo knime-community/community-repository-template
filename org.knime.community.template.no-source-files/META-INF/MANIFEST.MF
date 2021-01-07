@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: No source files 
+Bundle-SymbolicName: org.knime.no-source-files;singleton:=true
+Bundle-Version: 4.0.0.qualifier
+Bundle-Vendor: KNIME AG, Zurich, Switzerland
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

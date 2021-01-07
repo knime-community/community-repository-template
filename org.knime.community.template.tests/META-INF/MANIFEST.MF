@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KNIME communit Repository Template
+Bundle-SymbolicName: org.knime.community.template.tests;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.knime.community.template.plugin;bundle-version="1.0.0.qualifier"
+Bundle-Vendor: KNIME AG, Zurich, Switzerland
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.knime.core.pmml;bundle-version="[4.0.0,5.0.0)",
+ org.junit

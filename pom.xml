@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -11,12 +10,14 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<revision>4.2.0</revision>
+		<revision>1.0.0</revision>
 		<changelist>-SNAPSHOT</changelist>
+		<knime.version>4.3</knime.version>
 		<tycho.version>1.4.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 	</properties>
 
+	<!-- List the modules of your project here -->
 	<modules>
 		<module>org.knime.community.template.plugin</module>
 		<module>org.knime.community.template.tests</module>
@@ -25,15 +26,16 @@
 		<module>org.knime.community.template.update</module>
 	</modules>
 
+	<!-- List the update sites providing dependencies for your projects here -->
 	<repositories>
 		<repository>
 			<id>p2-knime-update-site</id>
 			<layout>p2</layout>
-			<url>https://update.knime.com/analytics-platform/4.3</url>
+			<url>https://update.knime.com/analytics-platform/${knime.version}</url>
 		</repository>
 	</repositories>
 
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -123,7 +125,7 @@
 
 		<plugins>
 			<plugin>
-			<!-- This plugin configuration block is only needed if the repository contains plug-ins that don't have any sources. If it is omitted
+				<!-- This plugin configuration block is only needed if the repository contains plug-ins that don't have any sources. If it is omitted
 		 		Tycho will complain. -->
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-source-feature-plugin</artifactId>
@@ -139,7 +141,7 @@
 				<configuration>
 					<excludes>
 						<!-- List all plug-in that do NOT contain sources here. -->
-						<plugin id="org.knime.community.template.no-source-files" />
+						<!-- <plugin id="org.knime.community.template.no-source-files" /> -->
 					</excludes>
 				</configuration>
 			</plugin>

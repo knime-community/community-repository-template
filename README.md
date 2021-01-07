@@ -1,22 +1,39 @@
-# Template for Analytics Platform repositories
+# Template for community extension repositories
 
-In addition to plug-ins and features that are installed by user, every repository needs some additional files and folders:
+## Introduction 
+This repository contains the necessary example configuration for building
+KNIME AP extensions with maven. To use this you need to setup your SDK as described in: 
+https://github.com/knime/knime-sdk-setup
+
+### Example configurations
+In addition to plug-ins and features that are meant to be installed by the
+users of an extension, every repository needs some additional files and folders, 
+to facilitate the build process.
 
 * An update site project for specifying which artifacts should be built and published.
-  `org.knime.update.ap-repository-template` is the template for this. Its `category.xml` contains a list of all features
+  `org.knime.community.template.update` is the template for this. Its `category.xml` contains a list of all features
   (and optionally plug-ins/bundles), including potential source features (or bundles). The `pom.xml` must be adapted to
   have the correct artifact ID.
-* Optional but required in many cases: A "testing" feature that is installed as part of the workflow tests and pulls in
-  everything that is required to run the test workflows. This includes the main feature in the repository, as well as
-  dedicated test plug-ins and features from other projects that provide nodes which are used in the test workflows.
-* Special files and configuration for test workflows in `workflow-tests`. Required VM arguments go into
-  `workflow-test/vmargs`, required Eclipse preferences go into `workflow-tests/preferences.epf`.
-
-  If you need OS-specific preferences, put them into `workflow-tests/preferences-Linux.epf`,
-  `workflow-tests/preferences-Windows.epf`, or `workflow-tests/preferences-MacOSX.epf`, respectively. Only one
-  preference file will be loaded, with the OS-specific file taking precedence.
-
-  Any of those files can be deleted if they are not required.
 * `pom.xml`: It lists all modules/projects that should be processed during the build as well as all upstream
   repositories that contain required dependencies.
-* `Jenkinsfile`: used by the build system only. Have a look into the file for instructions what parts must be adapted.
+
+## How to build and install
+You need to have maven installed in at least version `3.6.3`, then you can
+build using `mvn verify`. This will compile the code, run the tests and
+create the update site. You will find the update site in the directory
+`org.knime.community.template.update/target/repository`, you can add this
+path to your AP and install the freshly build plugins for local debugging.
+
+## Example projects explained:
+This repo contains several example projects that demonstrate certain features 
+- `org.knime.community.template.feature` Example feature project.
+- `org.knime.community.template.plugin` Example plugin project
+- `org.knime.community.template.tests` Example unit test plugin, tests
+contained in this project are run in a minimal eclipse rcp instance,
+generated using your plug-in dependencies. This ensures they can access all
+the necessary dependencies.
+- `org.knime.community.template.update` Example update site project
+- `org.knime.community.template.no-source-files` this project demonstrates
+the special case for plugins that do not contain source file. Maven will
+complain about this, the `pom.xml` contains a section (lines 127-147) where
+such projects are excluded

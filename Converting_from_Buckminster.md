@@ -45,9 +45,10 @@ along with a `buckminster.rmap` file and `feature.xml` file then you need to eit
   - There is an (incomplete) description of the `category.xml` format at https://wiki.eclipse.org/Tycho/category.xml
   - Categories are defined with `<category-def>` tags.
   - Features are added to categories with a `<feature>` tag and nested `<category>` tags.
-  - Any plugins in the directly listed in the `feature.xml` file of the original update site project should be added in `<bundle>` tags.  These are usually 'core'-type plugins required by one or more feautres, but not included in any of them.
+  - Under Buckminster, source features were named by prefixing `.feature` with `.source` (e.g. `org.foo.bah.feature` became `org.foo.bah.source.feature`.) Under Maven / Tycho, the name is suffixed `.source`, so `org.foo.bah.feature` becomes `org.foo.bah.feature.source`
+  - Any plugins in the directly listed in the `feature.xml` file of the original update site project should be added in `<bundle>` tags.  These are usually 'core'-type plugins required by one or more features, but not included in any of them.
   - It is important to ensure the `category.xml` file does not contain a `url` attribute, and that the version attribute is set as `version="0.0.0"`
-  - It may be possible to generate the `category.xml` file programmatically in KNIME from the `build.properties` file.
+  - If you want to add a source category, create an additional category, and add each `source` feature (the feature IDs are the same as the corresponding feature, with `.source` inserted immediately prior to `.feature`, e.g. `org.foo.bah.feature` becomes `org.foo.bah.source.feature`)
 
 4. `pom.xml` file
   - Copy the template from https://github.com/knime-community/community-repository-template/blob/master/org.knime.community.template.update/pom.xml into the site projects
@@ -57,3 +58,7 @@ along with a `buckminster.rmap` file and `feature.xml` file then you need to eit
 ## Tests
 Unit tests should be in fragments of the parent plugin, with the name ending `.tests`, following the template at https://github.com/sroughley/community-repository-template/tree/master/org.knime.community.template.tests.
 Any existing test cases should have the `pom.xml` file from the above location added, and the `<parent>` `<groupId>` and `<artifactId>` tags updated to the values in the parent `pom.xml` file
+
+## Further Reading
+* "Eclipse Plug-in Development: Beginner's Guide" by Alex Blewitt (2nd Edition) has a chapter on 'Automated build tools using Tycho' and provides a good general introduction to converting Eclipse projects to Maven Tycho projects, although it does not specifically cover using Tycho-pomless (https://www.packtpub.com/product/eclipse-plug-in-development-beginner-s-guide-second-edition/9781783980697)
+* "POM-less Tycho Enhanced" (Vogella blog) gives an good overview of Tycho pomless (http://blog.vogella.com/2019/11/25/pom-less-tycho-enhanced/)

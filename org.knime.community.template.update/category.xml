@@ -3,6 +3,9 @@
    <feature id="org.knime.community.template.feature" version="0.0.0">
        <category name="knime-community-repository-template" />
    </feature>
+   <feature id="org.knime.community.template.feature.source" version="0.0.0">
+       <category name="knime-community-repository-template" />
+   </feature>
 
    <category-def name="knime-community-repository-template" label="Build artifacts from knime-community-repository-template">
        <description>Build artifacts from knime-community-repository-template</description>

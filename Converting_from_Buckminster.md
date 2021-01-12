@@ -71,9 +71,6 @@ mvn -B clean package
 If you need debug output (useful when first getting the project to build), then you can add the options `-X -e` to the command before the Maven goals. See https://books.sonatype.com/mvnref-book/reference/running-sect-options.html for further details of Maven command line options.
 Once the build is completing successfully, then you need to change where you copy the built update site from to `${workspace}/org.foo.bah.site.feature/target/repository/` during deployment.
 
-If you do not start your build by clearing your entire build workspace, then adding the option `-rf` to the maven build command should mean only updated plugins are rebuilt
-
-
 ## Further Reading
 * "Eclipse Plug-in Development: Beginner's Guide" by Alex Blewitt (2nd Edition) has a chapter on 'Automated build tools using Tycho' and provides a general introduction to converting Eclipse projects to Maven Tycho projects, although it does not specifically cover using Tycho-pomless (https://www.packtpub.com/product/eclipse-plug-in-development-beginner-s-guide-second-edition/9781783980697)
 * "POM-less Tycho Enhanced" (Vogella blog) gives an overview of Tycho pomless (http://blog.vogella.com/2019/11/25/pom-less-tycho-enhanced/)

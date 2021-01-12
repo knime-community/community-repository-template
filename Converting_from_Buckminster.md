@@ -45,7 +45,7 @@ along with a `buckminster.rmap` file and `feature.xml` file then you need to eit
   - There is an (incomplete) description of the `category.xml` format at https://wiki.eclipse.org/Tycho/category.xml
   - Categories are defined with `<category-def>` tags.
   - Features are added to categories with a `<feature>` tag and nested `<category>` tags.
-  - Under Buckminster, source features were named by prefixing `.feature` with `.source` (e.g. `org.foo.bah.feature` became `org.foo.bah.source.feature`.) Under Maven / Tycho, the name is suffixed `.source`, so `org.foo.bah.feature` becomes `org.foo.bah.feature.source`
+  - Under Buckminster, source features were named by prefixing `.feature` with `.source` (e.g. `org.foo.bah.feature` became `org.foo.bah.source.feature`)  Under Maven / Tycho, the name is suffixed `.source`, so `org.foo.bah.feature` becomes `org.foo.bah.feature.source`
   - Any plugins in the directly listed in the `feature.xml` file of the original update site project should be added in `<bundle>` tags.  These are usually 'core'-type plugins required by one or more features, but not included in any of them.
   - It is important to ensure the `category.xml` file does not contain a `url` attribute, and that the version attribute is set as `version="0.0.0"`
   - If you want to add a source category, create an additional category, and add each `source` feature (the feature IDs are the same as the corresponding feature, with `.source` inserted immediately prior to `.feature`, e.g. `org.foo.bah.feature` becomes `org.foo.bah.source.feature`)
@@ -55,10 +55,26 @@ along with a `buckminster.rmap` file and `feature.xml` file then you need to eit
   - Update the `<parent>` `<groupId>` and `<artifactId>` tags with the values in the parent project `pom.xml` file
   - Update the `<artifactId>` tag with the current update site project name
 
+5. Other caveats / considerations
+  * Maven seems a bit stricter than Buckminster was about some compiler warnings which Maven converts to build failures, so you may have a bit of debugging to do
+  * If you use a license feature to share a license between all your features (e.g `org.foo.bar.license`), Maven will fail the build unless the `build.properties` file in the license feature includes itself in the `bin.includes` entry (see e.g. the thread at https://www.eclipse.org/lists/cbi-dev/msg00234.html)
+
 ## Tests
 Unit tests should be in fragments of the parent plugin, with the name ending `.tests`, following the template at https://github.com/sroughley/community-repository-template/tree/master/org.knime.community.template.tests.
 Any existing test cases should have the `pom.xml` file from the above location added, and the `<parent>` `<groupId>` and `<artifactId>` tags updated to the values in the parent `pom.xml` file
 
+## Jenkins
+Building Tycho-pomless in Jenkins is a little strange as the Jenkins Maven build plugin does not work with pomless builds, and so you need to use a freestyle project instead, and install a standalone Maven instance (see https://maven.apache.org/install.html for details) if you do not already have it on your build server. NB On Windows, once you have added the Maven `bin` folder to your `PATH` environment variable you will need to restart the Jenkins service.  If you already have a Jenkins build job configured for building your project _via_ Buckminster, then creating a new job based on that job is probably easiest.  You then need to run the command:
+```
+mvn -B clean package
+```
+If you need debug output (useful when first getting the project to build), then you can add the options `-X -e` to the command before the Maven goals. See https://books.sonatype.com/mvnref-book/reference/running-sect-options.html for further details of Maven command line options.
+Once the build is completing successfully, then you need to change where you copy the built update site from to `${workspace}/org.foo.bah.site.feature/target/repository/` during deployment.
+
+If you do not start your build by clearing your entire build workspace, then adding the option `-rf` to the maven build command should mean only updated plugins are rebuilt
+
+
 ## Further Reading
-* "Eclipse Plug-in Development: Beginner's Guide" by Alex Blewitt (2nd Edition) has a chapter on 'Automated build tools using Tycho' and provides a good general introduction to converting Eclipse projects to Maven Tycho projects, although it does not specifically cover using Tycho-pomless (https://www.packtpub.com/product/eclipse-plug-in-development-beginner-s-guide-second-edition/9781783980697)
-* "POM-less Tycho Enhanced" (Vogella blog) gives an good overview of Tycho pomless (http://blog.vogella.com/2019/11/25/pom-less-tycho-enhanced/)
+* "Eclipse Plug-in Development: Beginner's Guide" by Alex Blewitt (2nd Edition) has a chapter on 'Automated build tools using Tycho' and provides a general introduction to converting Eclipse projects to Maven Tycho projects, although it does not specifically cover using Tycho-pomless (https://www.packtpub.com/product/eclipse-plug-in-development-beginner-s-guide-second-edition/9781783980697)
+* "POM-less Tycho Enhanced" (Vogella blog) gives an overview of Tycho pomless (http://blog.vogella.com/2019/11/25/pom-less-tycho-enhanced/)
+* "What I Wish I Knew About Maven Years Ago" - well, OK, this isn't 'reading' as such, but it's a useful background talk on Maven at https://trshow.info/watch/DEOqLTxkK8A/what-I-wish-I-knew-about-maven-years-ago.html by [Andres Almiray](http://andresalmiray.com/)

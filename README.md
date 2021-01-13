@@ -1,9 +1,13 @@
 # Template for community extension repositories
 
-## Introduction 
-This repository contains the necessary example configuration for building
-KNIME AP extensions with maven. To use this you need to setup your SDK as described in: 
-https://github.com/knime/knime-sdk-setup
+## Introduction
+This repository contains the necessary example configuration for building KNIME
+AP extensions with maven.
+
+## Converting an existing buckminster build to use maven
+If you have a repository that is currently being build with buckminster and you
+want to convert it to maven, take a look at the instructions in [this
+guide](https://github.com/knime-community/community-repository-template/blob/master/Converting_from_Buckminster.md).
 
 ### Example configurations
 In addition to plug-ins and features that are meant to be installed by the

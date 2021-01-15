@@ -16,9 +16,8 @@ to facilitate the build process.
 
 * An update site project for specifying which artifacts should be built and published.
   `org.knime.community.template.update` is the template for this. Its `category.xml` contains a list of all features
-  (and optionally plug-ins/bundles), including potential source features (or bundles). The `pom.xml` must be adapted to
-  have the correct artifact ID.
-* `pom.xml`: It lists all modules/projects that should be processed during the build as well as all upstream
+  (and optionally plug-ins/bundles), including potential source features (or bundles). 
+* `pom.xml`: It lists all modules/projects that should be processed during the build as well as all p2
   repositories that contain required dependencies.
 
 ## How to build and install

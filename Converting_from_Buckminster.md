@@ -50,12 +50,7 @@ along with a `buckminster.rmap` file and `feature.xml` file then you need to eit
   - It is important to ensure the `category.xml` file does not contain a `url` attribute, and that the version attribute is set as `version="0.0.0"`
   - If you want to add a source category, create an additional category, and add each `source` feature (the feature IDs are the same as the corresponding feature, with `.source` inserted immediately prior to `.feature`, e.g. `org.foo.bah.feature` becomes `org.foo.bah.source.feature`)
 
-4. `pom.xml` file
-  - Copy the template from https://github.com/knime-community/community-repository-template/blob/master/org.knime.community.template.update/pom.xml into the site projects
-  - Update the `<parent>` `<groupId>` and `<artifactId>` tags with the values in the parent project `pom.xml` file
-  - Update the `<artifactId>` tag with the current update site project name
-
-5. Other caveats / considerations
+4. Other caveats / considerations
   * Maven seems a bit stricter than Buckminster was about some compiler warnings which Maven converts to build failures, so you may have a bit of debugging to do
   * If you use a license feature to share a license between all your features (e.g `org.foo.bar.license`), Maven will fail the build unless the `build.properties` file in the license feature includes itself in the `bin.includes` entry (see e.g. the thread at https://www.eclipse.org/lists/cbi-dev/msg00234.html)
 

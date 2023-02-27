@@ -7,5 +7,5 @@ Fragment-Host: org.knime.community.template.plugin;bundle-version="1.0.0.qualifi
 Bundle-Vendor: KNIME AG, Zurich, Switzerland
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.knime.core.pmml;bundle-version="[4.0.0,5.0.0)",
+Require-Bundle: org.knime.core.pmml;bundle-version="[4.0.0,6.0.0)",
  org.junit

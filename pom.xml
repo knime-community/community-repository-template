@@ -12,8 +12,8 @@
 	<properties>
 		<revision>1.0.0</revision>
 		<changelist>-SNAPSHOT</changelist>
-		<knime.version>5.0</knime.version>
-		<tycho.version>2.7.5</tycho.version>
+		<knime.version>5.1</knime.version>
+		<tycho.version>3.0.3</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -79,7 +79,7 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.eclipse.tycho.extras</groupId>
+					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-buildtimestamp-jgit</artifactId>
 					<version>${tycho.extras.version}</version>
 				</plugin>
@@ -91,11 +91,6 @@
 				<plugin>
 					<groupId>org.eclipse.tycho.extras</groupId>
 					<artifactId>tycho-p2-extras-plugin</artifactId>
-					<version>${tycho.extras.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho.extras</groupId>
-					<artifactId>tycho-source-feature-plugin</artifactId>
 					<version>${tycho.extras.version}</version>
 				</plugin>
 				<plugin>
@@ -127,27 +122,6 @@
 
 		<plugins>
 			<plugin>
-				<!-- This plugin configuration block is only needed if the repository contains plug-ins that don't have any sources. If it is omitted
-		 		Tycho will complain. -->
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludes>
-						<!-- List all plug-in that do NOT contain sources here. -->
-						<!-- <plugin id="org.knime.community.template.no-source-files" /> -->
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<extensions>true</extensions>
@@ -157,7 +131,7 @@
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<dependencies>
 					<dependency>
-						<groupId>org.eclipse.tycho.extras</groupId>
+						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>tycho-buildtimestamp-jgit</artifactId>
 						<version>${tycho.extras.version}</version>
 					</dependency>
@@ -212,6 +186,13 @@
 						<id>plugin-source</id>
 						<goals>
 							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<phase>package</phase>
+						<goals>
+							<goal>feature-source</goal>
 						</goals>
 					</execution>
 				</executions>
